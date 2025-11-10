@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db   = 'movietickets_db';
 $user = 'root';
-$pass = '';
+$pass = 'Andrarobert24';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
