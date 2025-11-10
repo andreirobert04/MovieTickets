@@ -16,7 +16,7 @@ final class CSRFTokenServiceTest extends TestCase
     {
         $token = CSRFTokenService::generateToken();
         $this->assertNotEmpty($token);
-        $this->assertEquals(64, strlen($token)); // 32 bytes hex
+        $this->assertEquals(64, strlen($token));
     }
 
     public function testValidateTokenWorks(): void

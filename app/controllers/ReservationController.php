@@ -87,7 +87,7 @@ class ReservationController extends Controller
         try {
             $pdo->beginTransaction();
 
-            // Verificăm să nu fie locuri deja rezervate
+            // verificam sa nu fie locuri deja rezervate
             foreach ($seats as $seat) {
                 [$r, $c] = array_map('intval', explode('-', $seat));
                 $check = $pdo->prepare('
@@ -105,7 +105,7 @@ class ReservationController extends Controller
 
             }
 
-            // Inserăm rezervarea
+            // inseram rezervarea
             $stmt = $pdo->prepare('
                 INSERT INTO reservations (user_id, showtime_id)
                 VALUES (:uid, :sid)
@@ -116,7 +116,7 @@ class ReservationController extends Controller
             ]);
             $reservationId = $pdo->lastInsertId();
 
-            // Inserăm locurile
+            // inseram locurile
             $insert = $pdo->prepare('
                 INSERT INTO reservation_seats (reservation_id, showtime_id, seat_row, seat_number)
                 VALUES (:rid, :sid, :r, :c)

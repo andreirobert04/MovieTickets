@@ -127,13 +127,13 @@ class MovieController extends Controller
 
         $pdo = getDB();
 
-        // Preluăm filmul curent
+        // preluam filmul curent
         $stmt = $pdo->prepare('SELECT poster_path FROM movies WHERE id = :id');
         $stmt->execute(['id' => $id]);
         $old = $stmt->fetch();
         $posterName = $old ? $old['poster_path'] : 'default.jpg';
 
-        // Verificăm dacă a fost încărcat un nou fișier
+        // verificam daca a fost incarcat un nou fisier
         if (!empty($_FILES['poster']['name'])) {
             $uploadDir = __DIR__ . '/../../public/images/posters/';
             $posterName = basename($_FILES['poster']['name']);

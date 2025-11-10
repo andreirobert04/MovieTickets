@@ -11,8 +11,6 @@
     <div class="carousel">
         <div class="carousel-track">
             <?php
-            // Poți alege între random sau primele 5 filme
-            // $featured = array_slice($movies, 0, 5);
             $featured = $movies;
 
             foreach ($featured as $f):
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let index = 0;
 
     const update = () => {
-        // dacă e doar un film, nu mișcăm nimic
+        // daca e doar un film, nu miscam nimic
         if (slides.length === 1) {
             slides[0].style.transform = 'translateX(0)';
             return;
