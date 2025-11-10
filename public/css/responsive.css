@@ -1,0 +1,67 @@
+/* ===============================
+   RESPONSIVE.CSS
+   =============================== */
+
+/* Tablete / ecrane medii */
+@media (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .movies-grid {
+        justify-content: center;
+    }
+
+    .movie-card {
+        width: 45%;
+    }
+}
+
+/* Telefoane */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+        padding: 0;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 8px 6px;
+        font-size: 15px;
+    }
+
+    .movie-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .carousel-slide img {
+        max-width: 140px;
+    }
+
+    .seats-grid {
+        transform: scale(0.9);
+    }
+}
+
+/* Telefoane mici (sub 500px) */
+@media (max-width: 500px) {
+    header {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .carousel-btn {
+        font-size: 18px;
+        padding: 2px 8px;
+    }
+
+    footer p {
+        font-size: 13px;
+    }
+}

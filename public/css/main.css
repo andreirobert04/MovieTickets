@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #111827;
+    color: #e5e7eb;
+}
+
+header {
+    background: #111827;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #374151;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+    color: #60a5fa;
+}
+
+nav a {
+    color: #e5e7eb;
+    margin-left: 16px;
+    text-decoration: none;
+}
+
+main {
+    padding: 24px;
+}
+
+.movies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.movie-card {
+    background: #1f2937;
+    padding: 12px;
+    border-radius: 8px;
+    width: 180px;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.movie-details {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.movie-poster img,
+.poster-placeholder {
+    width: 200px;
+    height: 300px;
+    border-radius: 8px;
+    background: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    border: 1px solid #374151;
+}
+
+.movie-info h2 {
+    margin-top: 0;
+}
+
+.showtimes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.showtimes-table th,
+.showtimes-table td {
+    padding: 8px;
+    border-bottom: 1px solid #374151;
+}
+
+.showtimes-table a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.seats-grid {
+    display: inline-block;
+    padding: 12px;
+    background: #111827;
+    border-radius: 8px;
+    border: 1px solid #374151;
+}
+
+.seat-row {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.seat {
+    width: 30px;
+    height: 26px;
+    font-size: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seat.available {
+    background: #10b981;
+    cursor: pointer;
+}
+
+.seat.available input {
+    display: none;
+}
+
+.seat.reserved {
+    background: #6b7280;
+    cursor: not-allowed;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+.carousel-slide img {
+  max-width: 220px;
+  border-radius: 8px;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
