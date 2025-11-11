@@ -30,25 +30,23 @@
 
 <h3>Proiecții disponibile</h3>
 
-<?php if (empty($showtimes)): ?>
-    <p>Momentan nu există proiecții programate pentru acest film.</p>
-<?php else: ?>
+<?php if (!empty($showtimes)): ?>
     <table class="showtimes-table">
         <thead>
-        <tr>
-            <th>Data & ora</th>
-            <th>Sală</th>
-            <th>Preț</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>Data & ora</th>
+                <th>Sală</th>
+                <th>Preț</th>
+                <th></th> <!-- coloană pentru buton -->
+            </tr>
         </thead>
         <tbody>
         <?php foreach ($showtimes as $st): ?>
             <tr>
                 <td><?php echo htmlspecialchars($st['start_time']); ?></td>
                 <td><?php echo htmlspecialchars($st['hall_name']); ?></td>
-                <td><?php echo htmlspecialchars($st['price']); ?> RON</td>
-                <td>
+                <td><?php echo number_format($st['price'], 2); ?> RON</td>
+                <td class="actions">
                     <a href="/?controller=reservation&action=selectSeats&showtime_id=<?php echo (int)$st['id']; ?>">
                         Rezervă bilete
                     </a>
@@ -57,6 +55,8 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+<?php else: ?>
+    <p>Nu există proiecții disponibile pentru acest film.</p>
 <?php endif; ?>
 
 <p>

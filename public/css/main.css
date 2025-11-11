@@ -75,19 +75,40 @@ main {
 .showtimes-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 12px;
+    margin-top: 16px;
+    font-size: 14px;
 }
 
 .showtimes-table th,
 .showtimes-table td {
-    padding: 8px;
-    border-bottom: 1px solid #374151;
+    padding: 10px 24px;
+    border-bottom: 1px solid #1f2937;
+    text-align: left;
 }
 
-.showtimes-table a {
-    color: #60a5fa;
+.showtimes-table thead th {
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+.showtimes-table tbody tr:hover {
+    background-color: #111827;
+}
+
+.showtimes-table td.actions {
+    text-align: right;
+}
+
+.showtimes-table td.actions a {
+    color: #3b82f6;
+    font-weight: 500;
     text-decoration: none;
 }
+
+.showtimes-table td.actions a:hover {
+    text-decoration: underline;
+}
+
 
 .seating-area {
     display: flex;
