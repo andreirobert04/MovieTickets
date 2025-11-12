@@ -228,6 +228,20 @@ body.dark-mode .screen {
     background-color: #2563eb;
 }
 
+.btn-link-danger {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0;
+}
+
+.btn-link-danger:hover {
+    text-decoration: underline;
+}
+
+
 
 .carousel {
   position: relative;

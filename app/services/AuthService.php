@@ -51,10 +51,33 @@ class AuthService
             return null;
         }
 
-        if (!password_verify($password, $user['password_hash'])) {
-            return null;
+        if (password_verify($password, $user['password_hash'])) {
+            $_SESSION['user'] = [
+                'id'    => $user['id'],
+                'name'  => $user['name'],
+                'email' => $user['email'],
+                'role'  => $user['role'] ?? 'user',
+            ];
+            return $_SESSION['user'];
         }
 
-        return $user;
+        return null;
+    }
+
+    public static function logout(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+    }
+
+    public static function user(): ?array
+    {
+        return $_SESSION['user'] ?? null;
+    }
+
+    public static function isAdmin(): bool
+    {
+        return !empty($_SESSION['user'])
+            && ($_SESSION['user']['role'] ?? 'user') === 'admin';
     }
 }

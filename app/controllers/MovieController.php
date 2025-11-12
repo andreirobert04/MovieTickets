@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../core/Controller.php';
 require_once __DIR__ . '/../models/Movie.php';
 require_once __DIR__ . '/../models/Showtime.php';
+require_once __DIR__ . '/../services/AuthService.php';
 
 class MovieController extends Controller
 {
@@ -33,11 +34,14 @@ class MovieController extends Controller
 
     public function createForm(): void
     {
+        $this->requireAdmin();
         $this->render('movie/create');
     }
 
     public function store(): void
     {
+        $this->requireAdmin();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /?controller=movie&action=createForm');
             exit;
@@ -99,6 +103,8 @@ class MovieController extends Controller
 
     public function editForm(): void
     {
+        $this->requireAdmin();
+
         $id = (int)($_GET['id'] ?? 0);
         $movie = Movie::getById($id);
 
@@ -112,6 +118,8 @@ class MovieController extends Controller
 
     public function update(): void
     {
+        $this->requireAdmin();
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /?controller=movie&action=index');
             exit;
@@ -171,5 +179,28 @@ class MovieController extends Controller
         exit;
     }
 
+    public function delete(): void
+    {
+        $this->requireAdmin();
+        $id = (int)($_POST['id'] ?? 0);
+
+        if ($id > 0) {
+            $pdo = getDB();
+            $stmt = $pdo->prepare('DELETE FROM movies WHERE id = :id');
+            $stmt->execute(['id' => $id]);
+        }
+
+        header('Location: /?controller=movie&action=index');
+        exit;
+    }
+
+    private function requireAdmin(): void
+    {
+        if (!AuthService::isAdmin()) {
+            http_response_code(403);
+            echo "Access denied. Admin only.";
+            exit;
+        }
+    }
 
 }

@@ -1,10 +1,5 @@
 <h2>Filme disponibile</h2>
 
-<style>
-
-</style>
-
-
 <?php if (!empty($movies)): ?>
 
     <!-- Carousel -->
@@ -53,10 +48,23 @@
                 <a href="/?controller=movie&action=show&id=<?php echo (int)$movie['id']; ?>">
                     Detalii & proiecții
                 </a>
+
                 <br>
-                <a href="/?controller=movie&action=editForm&id=<?php echo (int)$movie['id']; ?>">
-                    Editează
-                </a>
+                <?php if (AuthService::isAdmin()): ?>
+                    <br>
+                    <a href="/?controller=movie&action=editForm&id=<?php echo (int)$movie['id']; ?>">
+                        Editează
+                    </a>
+                    <form method="post"
+                          action="/?controller=movie&action=delete"
+                          style="display:inline;"
+                          onsubmit="return confirm('Sigur ștergi acest film?');">
+                        <input type="hidden" name="id" value="<?php echo (int)$movie['id']; ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo CSRFTokenService::generateToken(); ?>">
+                        <button type="submit" class="btn-link-danger">Șterge</button>
+                    </form>
+                <?php endif; ?>
+
             </div>
         <?php endforeach; ?>
     </div>

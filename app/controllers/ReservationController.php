@@ -170,4 +170,53 @@ class ReservationController extends Controller
             'reservations' => $reservations
         ]);
     }
+
+    public function delete(): void
+    {
+        if (empty($_SESSION['user'])) {
+            header('Location: /?controller=auth&action=loginForm');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo "Method not allowed";
+            return;
+        }
+
+        if (!CSRFTokenService::validateToken($_POST['csrf_token'] ?? '')) {
+            die('Token CSRF invalid.');
+        }
+
+        $reservationId = (int)($_POST['reservation_id'] ?? 0);
+        $userId = $_SESSION['user']['id'] ?? 0;
+
+        if ($reservationId <= 0) {
+            echo "Rezervare invalidă.";
+            return;
+        }
+
+        $pdo = getDB();
+
+        //verificam daca rezervarea ii apartine userului
+        $stmt = $pdo->prepare('SELECT id FROM reservations WHERE id = :id AND user_id = :user_id');
+        $stmt->execute([
+            'id' => $reservationId,
+            'user_id' => $userId
+        ]);
+
+        $reservation = $stmt->fetch();
+        if (!$reservation) {
+            echo "Nu poți șterge această rezervare.";
+            return;
+        }
+
+        //stergere efectiva
+        $delete = $pdo->prepare('DELETE FROM reservations WHERE id = :id');
+        $delete->execute(['id' => $reservationId]);
+
+        header('Location: /?controller=reservation&action=myReservations');
+        exit;
+    }
+
 }
